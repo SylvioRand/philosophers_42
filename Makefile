@@ -2,6 +2,7 @@ NAME = philo
 
 SRC = main.c \
 	  ./store_args.c \
+	  ./create_forks.c \
 	  ./utils/ft_putstr.c \
 	  ./create_threads.c \
 	  ./error_management/error_args.c \
@@ -11,11 +12,11 @@ SRC = main.c \
 
 OBJS = ${SRC:.c=.o}
 
-CC = cc
+CC = gcc
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -pthread -Wall -Wextra -Werror
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

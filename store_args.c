@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:03:56 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/13 10:14:59 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:23:19 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_int_value(char *nb_str)
 {
-	long long 	value;
+	long long	value;
 
 	value = 0;
 	while (*nb_str)
@@ -27,7 +27,6 @@ static int	get_int_value(char *nb_str)
 		}
 		nb_str++;
 	}
-
 	return (value);
 }
 
