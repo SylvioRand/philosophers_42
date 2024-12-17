@@ -9,6 +9,7 @@ SRC = main.c \
 	  ./error_management/err.c \
 	  ./utils/ft_strlen.c \
 	  ./utils/is_positive_numeric.c \
+	  ./routine/philo_eat.c \
 
 OBJS = ${SRC:.c=.o}
 
