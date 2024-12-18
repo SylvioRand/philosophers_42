@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 09:59:44 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/18 10:38:22 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:24:10 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	print_state(t_philo *philo, char *str)
 
 	p_data = get_philo_data_ptr();
 	time_ms = get_time_in_ms(p_data->start);
+	pthread_mutex_lock(&p_data->mutex_dead_flag);
 	if (p_data->dead_flag == 0)
 	{
 		pthread_mutex_lock(&p_data->mutex_printf);
@@ -56,14 +57,18 @@ int	print_state(t_philo *philo, char *str)
 	}
 	else
 	{
+		pthread_mutex_lock(&p_data->mutex_printf);
 		if (philo->right_hand)
 			pthread_mutex_unlock(philo->r_fork);
 		if (philo->left_hand)
 			pthread_mutex_unlock(philo->l_fork);
 		philo->left_hand = 0;
 		philo->right_hand = 0;
+		pthread_mutex_unlock(&p_data->mutex_printf);
+		pthread_mutex_unlock(&p_data->mutex_dead_flag);
 		return (-1);
 	}
+	pthread_mutex_unlock(&p_data->mutex_dead_flag);
 	return (0);
 }
 

@@ -21,7 +21,7 @@ CC = gcc
 
 RM = rm -rf
 
-CFLAGS = -pthread -Wall -Wextra -Werror -g
+CFLAGS = -pthread -Wall -Wextra -Werror
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
