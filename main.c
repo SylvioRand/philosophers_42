@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 09:59:44 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/17 19:17:59 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:38:22 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,22 @@ static void	join_all_threads(t_philo_d *p_data, t_philo *philos)
 	pthread_join(p_data->monitor_death, NULL);
 }
 
-long 	get_time_in_ms(struct timeval start)
+long	get_time_in_ms(struct timeval start)
 {
-    struct timeval	current;
+	struct timeval	current;
 	long			seconds;
 	long			microseconds;
 
-    gettimeofday(&current, NULL);
-    seconds = current.tv_sec - start.tv_sec;
-    microseconds = current.tv_usec - start.tv_usec;
-    return (seconds * 1000) + (microseconds / 1000);
+	gettimeofday(&current, NULL);
+	seconds = current.tv_sec - start.tv_sec;
+	microseconds = current.tv_usec - start.tv_usec;
+	return ((seconds * 1000) + (microseconds / 1000));
 }
 
 t_philo_d	*get_philo_data_ptr(void)
 {
 	static t_philo_d	philo_data;
+
 	return (&philo_data);
 }
 
@@ -50,7 +51,7 @@ int	print_state(t_philo *philo, char *str)
 	if (p_data->dead_flag == 0)
 	{
 		pthread_mutex_lock(&p_data->mutex_printf);
-		printf("%ldms %d %s", time_ms, philo->id, str);
+		printf("%ld %d %s", time_ms, philo->id, str);
 		pthread_mutex_unlock(&p_data->mutex_printf);
 	}
 	else

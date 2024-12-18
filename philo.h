@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 10:24:05 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/17 16:34:36 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:48:41 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <semaphore.h>
-
-
-typedef enum e_state {
-    THINKING,
-    EATING,
-    SLEEPING
-} t_state;
 
 typedef struct s_philo
 {
@@ -68,7 +61,6 @@ void		err(char *s);
 int			is_positive_numeric(char *token);
 void		store_args(int argc, char **argv, t_philo_d *philo_data);
 void		create_phreads(t_philo_d *p_data, t_philo *philos);
-void		ft_putstr(char *str);
 void		create_forks(t_philo_d *philo_data);
 void		ft_putnbr(int nb);
 long		get_time_in_ms(struct timeval start);
@@ -76,5 +68,13 @@ t_philo_d	*get_philo_data_ptr(void);
 int			print_state(t_philo *philo, char *str);
 int			philosopher_odd_eat(t_philo *philo);
 int			philosopher_even_eat(t_philo *philo);
+void		lock_right_fork(t_philo *philo);
+void		lock_left_fork(t_philo *philo);
+void		unlock_right_fork(t_philo *philo);
+void		unlock_left_fork(t_philo *philo);
+void		*monitor_death(void *ptr);
+int			philosopher_sleep(t_philo *philo);
+int			philosopher_think(t_philo *philo);
+void		*routine(void *ptr);
 
 #endif

@@ -3,13 +3,17 @@ NAME = philo
 SRC = main.c \
 	  ./store_args.c \
 	  ./create_forks.c \
-	  ./utils/ft_putstr.c \
+	  ./monitor_death.c \
 	  ./create_threads.c \
 	  ./error_management/error_args.c \
 	  ./error_management/err.c \
 	  ./utils/ft_strlen.c \
 	  ./utils/is_positive_numeric.c \
-	  ./routine/philo_eat.c \
+	  ./routine/eat.c \
+	  ./routine/routine.c \
+	  ./routine/sleep.c \
+	  ./routine/think.c \
+	  ./routine/eat_utils.c \
 
 OBJS = ${SRC:.c=.o}
 
@@ -17,7 +21,7 @@ CC = gcc
 
 RM = rm -rf
 
-CFLAGS = -pthread -Wall -Wextra -Werror
+CFLAGS = -pthread -Wall -Wextra -Werror -g
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

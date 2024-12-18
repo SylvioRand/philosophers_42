@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 07:28:28 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/17 07:32:06 by srandria         ###   ########.fr       */
+/*   Created: 2024/12/18 09:19:22 by srandria          #+#    #+#             */
+/*   Updated: 2024/12/18 09:27:16 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	ft_putchar(char c)
+int	philosopher_sleep(t_philo *philo)
 {
-	write(1, &c, 1);
-}
+	t_philo_d		*p_data;
+	struct timeval	start;
 
-void	ft_putnbr(int nb)
-{
-	if(nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if(nb < 0)
-	{
-		ft_putchar('-');
-		nb = -nb;
-	}
-	if(nb > 9)
-	{
-		ft_putnbr(nb / 10);
-	ft_putchar(nb % 10 + '0');
-	}
+	p_data = get_philo_data_ptr();
+	gettimeofday(&start, NULL);
+	print_state(philo, "is sleeping\n");
+	while (get_time_in_ms(start) < p_data->time_to_sleep
+		&& p_data->dead_flag == 0)
+		usleep(0);
+	if (p_data->dead_flag == 1)
+		return (-1);
+	return (0);
 }
