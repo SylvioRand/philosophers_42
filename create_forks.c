@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 08:26:29 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/18 18:07:35 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:51:10 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ void	create_forks(t_philo_d *philo_data)
 	{
 		destroy_mutexes(philo_data, philo_data->nb_philos);
 		pthread_mutex_destroy(&philo_data->mutex_printf);
+		exit (1);
+	}
+	if (pthread_mutex_init(&philo_data->mutex_last_time_eat, NULL) != 0)
+	{
+		destroy_mutexes(philo_data, philo_data->nb_philos);
+		pthread_mutex_destroy(&philo_data->mutex_printf);
+		pthread_mutex_destroy(&philo_data->mutex_dead_flag);
+		exit (1);
+	}
+	if (pthread_mutex_init(&philo_data->mutex_data, NULL) != 0)
+	{
+		destroy_mutexes(philo_data, philo_data->nb_philos);
+		pthread_mutex_destroy(&philo_data->mutex_printf);
+		pthread_mutex_destroy(&philo_data->mutex_dead_flag);
+		pthread_mutex_destroy(&philo_data->mutex_last_time_eat);
 		exit (1);
 	}
 }

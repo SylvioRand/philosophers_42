@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:07:06 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/18 20:40:17 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:03:30 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	reset_loop_index(t_philo_d *p_data, int *i)
 {
 	if (*i == p_data->nb_philos - 1)
 		*i = -1;
-	usleep(50);
+	usleep(0);
 }
 
 static void	update_dead_flag(t_philo *philo, long time_ms, int i)
@@ -30,14 +30,17 @@ static void	update_dead_flag(t_philo *philo, long time_ms, int i)
 	pthread_mutex_unlock(&p_data->mutex_dead_flag);
 	if (p_data->nb_philos == 1)
 	{
+		pthread_mutex_lock(&p_data->mutex_data);
 		if (philo->left_hand)
 			pthread_mutex_unlock(philo->l_fork);
 		if (philo->right_hand)
 			pthread_mutex_unlock(philo->r_fork);
 		philo->right_hand = 0;
 		philo->left_hand = 0;
+		pthread_mutex_unlock(&p_data->mutex_data);
 	}
 	printf("\033[31m%ld %d is dead\n\033[0m", time_ms, i);
+	usleep(0);
 }
 
 void	*monitor_death(void *ptr)
@@ -51,14 +54,19 @@ void	*monitor_death(void *ptr)
 	philos = (t_philo *)ptr;
 	while (++i < p_data->nb_philos)
 	{
-//		pthread_mutex_lock(&p_data->mutex_printf);
+		pthread_mutex_lock(&p_data->mutex_last_time_eat);
 		time_ms = get_time_in_ms(philos[i].last_time_meal);
-//		pthread_mutex_unlock(&p_data->mutex_printf);
+		pthread_mutex_unlock(&p_data->mutex_last_time_eat);
 		if (time_ms > p_data->time_to_die)
 		{
+			pthread_mutex_lock(&p_data->mutex_data);
 			if (p_data->meals_to_stop != -1
 				&& philos[i].nb_meals == p_data->meals_to_stop)
+			{
+				pthread_mutex_unlock(&p_data->mutex_data);
 				return (NULL);
+			}
+			pthread_mutex_unlock(&p_data->mutex_data);
 			update_dead_flag(philos, time_ms, i);
 			return (NULL);
 		}

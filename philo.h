@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 10:24:05 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/18 18:03:45 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:50:40 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_philo_d
 	pthread_mutex_t	mutexes[200];
 	pthread_mutex_t	mutex_printf;
 	pthread_mutex_t	mutex_dead_flag;
+	pthread_mutex_t	mutex_last_time_eat;
+	pthread_mutex_t	mutex_data;
 }	t_philo_d;
 
 int			error_args(int argc, char **argv);

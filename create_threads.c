@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 09:07:56 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/18 09:21:39 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:11:43 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	create_phreads(t_philo_d *p_data, t_philo *philos)
 	gettimeofday(&p_data->start, NULL);
 	create_odd_threads(p_data, philos);
 	if ((p_data->nb_philos & 1) == 0)
-		usleep(100);
+		usleep(50);
 	create_even_threads(p_data, philos);
 	usleep(100);
 	create_monitor_death(philos);

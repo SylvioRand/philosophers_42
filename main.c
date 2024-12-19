@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 09:59:44 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/18 19:24:10 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:22:42 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,27 @@ long	get_time_in_ms(struct timeval start)
 	microseconds = current.tv_usec - start.tv_usec;
 	return ((seconds * 1000) + (microseconds / 1000));
 }
+
+/*
+long get_time_in_ms(struct timeval start)
+{
+    struct timeval current;
+    long seconds;
+    long microseconds;
+
+    gettimeofday(&current, NULL);
+    seconds = current.tv_sec - start.tv_sec;
+    microseconds = current.tv_usec - start.tv_usec;
+
+    if (microseconds < 0)
+    {
+        seconds -= 1;
+        microseconds += 1000000;
+    }
+
+    return ((seconds * 1000) + ((microseconds + 500) / 1000)); // Arrondi
+}
+*/
 
 t_philo_d	*get_philo_data_ptr(void)
 {
