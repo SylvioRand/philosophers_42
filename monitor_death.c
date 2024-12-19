@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:07:06 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 10:03:30 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:42:52 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ static void	update_dead_flag(t_philo *philo, long time_ms, int i)
 		philo->left_hand = 0;
 		pthread_mutex_unlock(&p_data->mutex_data);
 	}
+	pthread_mutex_lock(&p_data->mutex_printf);
 	printf("\033[31m%ld %d is dead\n\033[0m", time_ms, i);
+	pthread_mutex_unlock(&p_data->mutex_printf);
 	usleep(0);
 }
 

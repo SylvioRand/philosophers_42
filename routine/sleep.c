@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:19:22 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 11:36:08 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:27:36 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 int	philosopher_sleep(t_philo *philo)
 {
 	t_philo_d		*p_data;
-	struct timeval	start;
 	long			ms;
 
 	p_data = get_philo_data_ptr();
-	gettimeofday(&start, NULL);
 	print_state(philo, "is sleeping\n");
-	while ((ms = get_time_in_ms(start)) < p_data->time_to_sleep)
+	ms = get_time_in_ms(p_data->start);
+	while ((get_time_in_ms(p_data->start)) < ((p_data->time_to_sleep) + ms))
 	{
 		pthread_mutex_lock(&p_data->mutex_dead_flag);
 		if (p_data->dead_flag != 0)
@@ -30,11 +29,8 @@ int	philosopher_sleep(t_philo *philo)
 			break ;
 		}
 		pthread_mutex_unlock(&p_data->mutex_dead_flag);
-		usleep(0);
+		usleep(1);
 	}
-	pthread_mutex_lock(&p_data->mutex_printf);
-	printf("[%ld] <- [%d]\n", ms, philo->id);
-	pthread_mutex_unlock(&p_data->mutex_printf);
 	pthread_mutex_lock(&p_data->mutex_dead_flag);
 	if (p_data->dead_flag == 1)
 	{

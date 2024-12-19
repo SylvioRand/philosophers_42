@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 09:59:44 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 11:22:42 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:58:02 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,63 +34,11 @@ long	get_time_in_ms(struct timeval start)
 	return ((seconds * 1000) + (microseconds / 1000));
 }
 
-/*
-long get_time_in_ms(struct timeval start)
-{
-    struct timeval current;
-    long seconds;
-    long microseconds;
-
-    gettimeofday(&current, NULL);
-    seconds = current.tv_sec - start.tv_sec;
-    microseconds = current.tv_usec - start.tv_usec;
-
-    if (microseconds < 0)
-    {
-        seconds -= 1;
-        microseconds += 1000000;
-    }
-
-    return ((seconds * 1000) + ((microseconds + 500) / 1000)); // Arrondi
-}
-*/
-
 t_philo_d	*get_philo_data_ptr(void)
 {
 	static t_philo_d	philo_data;
 
 	return (&philo_data);
-}
-
-int	print_state(t_philo *philo, char *str)
-{
-	t_philo_d	*p_data;
-	long		time_ms;
-
-	p_data = get_philo_data_ptr();
-	time_ms = get_time_in_ms(p_data->start);
-	pthread_mutex_lock(&p_data->mutex_dead_flag);
-	if (p_data->dead_flag == 0)
-	{
-		pthread_mutex_lock(&p_data->mutex_printf);
-		printf("%ld %d %s", time_ms, philo->id, str);
-		pthread_mutex_unlock(&p_data->mutex_printf);
-	}
-	else
-	{
-		pthread_mutex_lock(&p_data->mutex_printf);
-		if (philo->right_hand)
-			pthread_mutex_unlock(philo->r_fork);
-		if (philo->left_hand)
-			pthread_mutex_unlock(philo->l_fork);
-		philo->left_hand = 0;
-		philo->right_hand = 0;
-		pthread_mutex_unlock(&p_data->mutex_printf);
-		pthread_mutex_unlock(&p_data->mutex_dead_flag);
-		return (-1);
-	}
-	pthread_mutex_unlock(&p_data->mutex_dead_flag);
-	return (0);
 }
 
 int	main(int argc, char *argv[])

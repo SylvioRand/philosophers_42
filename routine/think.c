@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:20:03 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 11:43:23 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:25:23 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	philosopher_think(t_philo *philo)
 
 	p_data = get_philo_data_ptr();
 	print_state(philo, "is thinking\n");
-	usleep(10);
+	usleep(200);
 	pthread_mutex_lock(&p_data->mutex_dead_flag);
 	if (p_data->dead_flag)
 	{

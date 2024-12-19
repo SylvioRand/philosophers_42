@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:21:16 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 11:44:51 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:03:31 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@ void	*routine(void *ptr)
 	philo = (t_philo *)ptr;
 	while (1)
 	{
+		usleep(0);
 		if ((philo->id & 1) == 0)
 		{
-			usleep(1);
 			if (philosopher_odd_eat(philo) == -1)
 				return (NULL);
 		}
 		else
 		{
-			usleep(1);
 			if (philosopher_even_eat(philo) == -1)
 				return (NULL);
 		}
-		usleep(1);
+		usleep(0);
 		if (philosopher_sleep(philo) == -1)
 			return (NULL);
-		usleep(1);
+		usleep(0);
 		if (philosopher_think(philo) == -1)
 			return (NULL);
 	}

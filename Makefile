@@ -3,6 +3,7 @@ NAME = philo
 SRC = main.c \
 	  ./store_args.c \
 	  ./create_forks.c \
+	  ./print_state.c \
 	  ./monitor_death.c \
 	  ./create_threads.c \
 	  ./error_management/error_args.c \
@@ -21,7 +22,7 @@ CC = gcc
 
 RM = rm -rf
 
-CFLAGS = -pthread -Wall -Wextra -Werror
+CFLAGS = -pthread  -Wall -Wextra -Werror
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
