@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 09:06:57 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/13 09:36:09 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:51:48 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	error_args(int argc, char **argv)
 	}
 	if (are_arguments_positive_numeric(argc, argv) == 0)
 	{
-		err("Error: positive numeric values are required.");
+		err("Error: The value must be a positive number greater than 0.");
 		return (-1);
 	}
 	if (argc <= 4)

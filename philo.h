@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 10:24:05 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 08:50:40 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:17:27 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,10 @@ void		*monitor_death(void *ptr);
 int			philosopher_sleep(t_philo *philo);
 int			philosopher_think(t_philo *philo);
 void		*routine(void *ptr);
+void		destroy_mutexes(t_philo_d *philo_data, int i);
+void		create_mutex_dead_flag(void);
+void		create_mutex_printf(void);
+void		create_mutex_last_time_eat(void);
+void		create_mutex_data(void);
 
 #endif

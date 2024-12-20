@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   think.c                                            :+:      :+:    :+:   */
+/*   create_forks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 09:20:03 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/20 09:47:45 by srandria         ###   ########.fr       */
+/*   Created: 2024/12/20 10:11:54 by srandria          #+#    #+#             */
+/*   Updated: 2024/12/20 10:12:10 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <pthread.h>
-#include <unistd.h>
 
-int	philosopher_think(t_philo *philo)
+void	create_forks(t_philo_d *philo_data)
 {
-	t_philo_d		*p_data;
+	int				i;
+	pthread_mutex_t	*mutexes;
 
-	p_data = get_philo_data_ptr();
-	print_state(philo, "is thinking\n");
-	usleep(5);
-	pthread_mutex_lock(&p_data->mutex_dead_flag);
-	if (p_data->dead_flag)
+	i = -1;
+	mutexes = philo_data->mutexes;
+	while (++i < philo_data->nb_philos)
 	{
-		pthread_mutex_unlock(&p_data->mutex_dead_flag);
-		return (-1);
+		if (pthread_mutex_init(&mutexes[i], NULL) != 0)
+		{
+			destroy_mutexes(philo_data, i);
+			exit (1);
+		}
 	}
-	pthread_mutex_unlock(&p_data->mutex_dead_flag);
-	return (0);
+	create_mutex_printf();
+	create_mutex_dead_flag();
+	create_mutex_last_time_eat();
+	create_mutex_data();
 }

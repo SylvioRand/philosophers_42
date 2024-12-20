@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:03:56 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/17 10:00:15 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:21:09 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static int	get_int_value(char *nb_str)
 			exit (1);
 		}
 		nb_str++;
+	}
+	if (value == 0)
+	{
+		err("Error: The value must be a positive number greater than 0.");
+		exit (1);
 	}
 	return (value);
 }

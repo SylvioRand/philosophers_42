@@ -6,7 +6,7 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:07:06 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 19:42:52 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:27:20 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static void	reset_loop_index(t_philo_d *p_data, int *i)
 	usleep(0);
 }
 
-static void	update_dead_flag(t_philo *philo, long time_ms, int i)
+static void	update_dead_flag(t_philo *philo, int i)
 {
 	t_philo_d	*p_data;
+	long		ms;
 
 	p_data = get_philo_data_ptr();
 	pthread_mutex_lock(&p_data->mutex_dead_flag);
@@ -40,9 +41,22 @@ static void	update_dead_flag(t_philo *philo, long time_ms, int i)
 		pthread_mutex_unlock(&p_data->mutex_data);
 	}
 	pthread_mutex_lock(&p_data->mutex_printf);
-	printf("\033[31m%ld %d is dead\n\033[0m", time_ms, i);
+	ms = get_time_in_ms(p_data->start);
+	printf("\033[31m%ld %d is dead\n\033[0m", ms, i + 1);
 	pthread_mutex_unlock(&p_data->mutex_printf);
 	usleep(0);
+}
+
+static int	get_time(t_philo *philos, int i)
+{
+	long		time_ms;
+	t_philo_d	*p_data;
+
+	p_data = get_philo_data_ptr();
+	pthread_mutex_lock(&p_data->mutex_last_time_eat);
+	time_ms = get_time_in_ms(philos[i].last_time_meal);
+	pthread_mutex_unlock(&p_data->mutex_last_time_eat);
+	return (time_ms);
 }
 
 void	*monitor_death(void *ptr)
@@ -50,16 +64,12 @@ void	*monitor_death(void *ptr)
 	t_philo_d	*p_data;
 	t_philo		*philos;
 	static int	i = -1;
-	long		time_ms;
 
 	p_data = get_philo_data_ptr();
 	philos = (t_philo *)ptr;
 	while (++i < p_data->nb_philos)
 	{
-		pthread_mutex_lock(&p_data->mutex_last_time_eat);
-		time_ms = get_time_in_ms(philos[i].last_time_meal);
-		pthread_mutex_unlock(&p_data->mutex_last_time_eat);
-		if (time_ms > p_data->time_to_die)
+		if (get_time(philos, i) >= p_data->time_to_die)
 		{
 			pthread_mutex_lock(&p_data->mutex_data);
 			if (p_data->meals_to_stop != -1
@@ -69,7 +79,7 @@ void	*monitor_death(void *ptr)
 				return (NULL);
 			}
 			pthread_mutex_unlock(&p_data->mutex_data);
-			update_dead_flag(philos, time_ms, i);
+			update_dead_flag(philos, i);
 			return (NULL);
 		}
 		reset_loop_index(p_data, &i);

@@ -2,7 +2,8 @@ NAME = philo
 
 SRC = main.c \
 	  ./store_args.c \
-	  ./create_forks.c \
+	  ./create_forks/create_forks.c \
+	  ./create_forks/create_forks_utils.c \
 	  ./print_state.c \
 	  ./monitor_death.c \
 	  ./create_threads.c \
