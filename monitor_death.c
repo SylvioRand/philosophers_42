@@ -6,12 +6,11 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:07:06 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/20 10:27:20 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:12:53 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philo.h" 
-#include <unistd.h>
 
 static void	reset_loop_index(t_philo_d *p_data, int *i)
 {

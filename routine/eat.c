@@ -6,12 +6,11 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:08:46 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 19:29:05 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:12:07 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <unistd.h>
 
 static void	manage_eating_time(void)
 {

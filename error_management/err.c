@@ -6,12 +6,11 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 09:12:26 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/12 09:36:38 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:11:48 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <stdio.h>
 
 void	err(char *s)
 {

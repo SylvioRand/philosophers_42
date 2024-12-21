@@ -6,12 +6,11 @@
 /*   By: srandria <srandria@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 09:03:55 by srandria          #+#    #+#             */
-/*   Updated: 2024/12/19 14:33:31 by srandria         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:12:10 by srandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <pthread.h>
 
 void	lock_left_fork(t_philo *philo)
 {
